@@ -1,4 +1,4 @@
-var player = videojs('vid1');
+var player = videojs('vid1', { "techOrder": ["youtube", "html5", "flash"] });
 
 player.playlist([{
   sources: [{
@@ -12,7 +12,11 @@ player.playlist([{
     type: 'video/mp4'
   }],
   poster: 'http://media.w3.org/2010/05/bunny/poster.png'
-}]);
+}],{
+  getVideoSource: function(vid, cb) {
+      cb(vid.src, vid.poster);
+  }
+});
 
 // // Play through the playlist automatically.
 player.playlist.autoadvance(0);
